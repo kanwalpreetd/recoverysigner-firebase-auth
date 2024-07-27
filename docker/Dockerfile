@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 as build
+FROM ubuntu:24.04 as build
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install --no-install-recommends -y gpg curl git ca-certificates apt-transport-https && \
@@ -15,7 +15,7 @@ WORKDIR /app/src
 RUN yarn install
 RUN yarn build
 
-FROM nginx:1.17
+FROM nginx:1.27
 
 COPY --from=build /app/src/docker/nginx.conf /etc/nginx/conf.d/default.conf
 
